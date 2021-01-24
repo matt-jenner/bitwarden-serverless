@@ -79,11 +79,11 @@ export const postHandler = async (event, context, callback) => {
       name: f.name,
       userUuid: u.get('uuid'),
     })
-    .then(result => ({ success: true, result, model: f }))
-    .catch(error => ({ success: false, error, model: f }))
+    .then((result) => ({ success: true, result, model: f }))
+    .catch((error) => ({ success: false, error, model: f }))
   );
 
-  const folderPromises = body.folders.map(folder => createFolder(folder, user));
+  const folderPromises = body.folders.map((folder) => createFolder(folder, user));
 
   const {
     output: folderOutput,
@@ -107,16 +107,16 @@ export const postHandler = async (event, context, callback) => {
     return;
   }
 
-  const createCipher = cipher => (
+  const createCipher = (cipher) => (
     Cipher.createAsync(cipher)
-      .then(result => ({ success: true, result, model: cipher }))
-      .catch(error => ({ success: false, error, model: cipher }))
+      .then((result) => ({ success: true, result, model: cipher }))
+      .catch((error) => ({ success: false, error, model: cipher }))
   );
 
   const cipherPromises = [];
   for (let i = 0; i < body.ciphers.length; i += 1) {
     const cipher = buildCipherDocument(normalizeBody(body.ciphers[i]), user);
-    const destFolder = body.folderrelationships.filter(fr => fr.key === i);
+    const destFolder = body.folderrelationships.filter((fr) => fr.key === i);
     if (destFolder.length === 1) {
       const whichFolder = destFolder[0].value;
       if (folderPromises.length > whichFolder) {

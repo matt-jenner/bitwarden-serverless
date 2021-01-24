@@ -41,7 +41,7 @@ export class CipherString {
 
   toString() {
     return [this.type + '.' + this.iv, this.ciphertext, this.mac]
-      .filter(v => !!v)
+      .filter((v) => !!v)
       .join('|');
   }
 }

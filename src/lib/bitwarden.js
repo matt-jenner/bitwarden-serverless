@@ -112,7 +112,7 @@ export function buildCipherDocument(body, user) {
     entries(body[additionalParamsType]).forEach(([key, value]) => {
       let paramValue = value;
       if (ucfirst(key) === 'Uris' && value) {
-        paramValue = value.map(val => mapKeys(val, (_, uriKey) => ucfirst(uriKey)));
+        paramValue = value.map((val) => mapKeys(val, (_, uriKey) => ucfirst(uriKey)));
       }
       params[additionalParamsType][ucfirst(key)] = paramValue;
     });
@@ -151,7 +151,6 @@ export function buildUserDocument(body) {
   }
   return user;
 }
-
 
 export function generateSecret() {
   return crypto.randomBytes(64).toString('hex');

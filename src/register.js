@@ -42,6 +42,7 @@ export const handler = async (event, context, callback) => {
       return;
     }
 
+    console.log('REGISTER USER BODY:', body);
     await User.createAsync(buildUserDocument(body));
 
     callback(null, utils.okResponse(''));
